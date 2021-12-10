@@ -1,0 +1,606 @@
+{
+	"info": {
+		"_postman_id": "8887b1df-ee29-4a26-ae17-58a3a9660635",
+		"name": "Avito_assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "account management",
+			"item": [
+				{
+					"name": "token auth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "avito",
+									"description": "Имя пользователя",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "avito",
+									"description": "Пароль",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api-token-auth",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api-token-auth"
+							]
+						},
+						"description": "Метод для получения токена пользователя для авторизации при работе с приложением."
+					},
+					"response": []
+				},
+				{
+					"name": "registration",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "test_user",
+									"description": "Имя пользователя",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test_password",
+									"description": "Пароль",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "test_surname",
+									"description": "Фамилия",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "test_name",
+									"description": "Имя",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/registration",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"registration"
+							]
+						},
+						"description": "Метод для регистрации новых пользователей в приложении. После регистрации можно и нужно получить токен."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user requests",
+			"item": [
+				{
+					"name": "total balance",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "Token ",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/balance",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"balance"
+							],
+							"query": [
+								{
+									"key": "currency",
+									"value": "USD",
+									"description": "*валюта",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Метод для получения общего баланса всех счетов пользователя. Требует токен для работы. По токену определяется какой пользователь запрашивает баланс.\n\nМожно добавить параметр для перевода в желаемую валюту."
+					},
+					"response": []
+				},
+				{
+					"name": "all wallets",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "Token e818ba63d2d91f9f78149cbff57b05d37d2b869f",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/wallets",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"wallets"
+							]
+						},
+						"description": "Метод для получения информации о всех счетах. Выводится списком."
+					},
+					"response": []
+				},
+				{
+					"name": "send funds",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "Token d6645d0c66060aafe9cbd2da074d361fd6168ddd",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "total_amount",
+									"value": "100",
+									"description": "Сумма перевода",
+									"type": "text"
+								},
+								{
+									"key": "recipient_id",
+									"value": "1",
+									"description": "Идентификатор получателя",
+									"type": "text"
+								},
+								{
+									"key": "wallet_id",
+									"value": "1",
+									"description": "Кошелек отправителя для снятия средств",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Для покупки ТВ",
+									"description": "*описание",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/send",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"send"
+							]
+						},
+						"description": "Метод для осуществления транзакций между пользователями. Требуется токен отправителя, кошелек для снятия, сумма и id получателя.\n\nПолучатель получит средства на базовый счет."
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "system requests",
+			"item": [
+				{
+					"name": "acquire funds",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "Token 06bfa85d17ec0328c06df3dac3cd7468951f5f61",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "recipient_id",
+									"value": "2",
+									"description": "Идентификатор получателя",
+									"type": "text"
+								},
+								{
+									"key": "total_amount",
+									"value": "1000.00",
+									"description": "Сумма внесения",
+									"type": "text"
+								},
+								{
+									"key": "wallet_id",
+									"value": "2",
+									"description": "*кошелек получателя для внесения средств",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/acquire",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"acquire"
+							]
+						},
+						"description": "Системный метод для внесения средств на пользовательские счета. Требуется выполнение с системным токенов (токен суперюзера). Указывается сумма и идентификатор получателя.\n\nТакже можно указать конкретный кошелек для внесения, в противном случае внесение будет произведено на кошелек по умолчанию."
+					},
+					"response": []
+				},
+				{
+					"name": "withdraw funds",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "Token 06bfa85d17ec0328c06df3dac3cd7468951f5f61",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "recipient_id",
+									"value": "2",
+									"description": "Идентификатор пользователя",
+									"type": "text"
+								},
+								{
+									"key": "total_amount",
+									"value": "400.00",
+									"description": "Сумма снятия",
+									"type": "text"
+								},
+								{
+									"key": "wallet_id",
+									"value": "2",
+									"description": "*кошелек для снятия",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/withdraw",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"withdraw"
+							]
+						},
+						"description": "Системный метод для снятия средств с пользовательских счетов. Требуется выполнение с системным токенов (токен суперюзера). Указывается сумма и идентификатор получателя.\n\nТакже можно указать конкретный кошелек для снятия, в противном случае снятие будет произведено с кошелька по умолчанию, если средств недостаточно, то будет выбран подходящий."
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "Token {{System Token}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "Authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "transactions requests",
+			"item": [
+				{
+					"name": "list of transactions",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "Token {{Qvineox Token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/transactions?sort_by=amount&items=10&direction=desc",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "sort_by",
+									"value": "amount",
+									"description": "*сортировка по полю"
+								},
+								{
+									"key": "items",
+									"value": "10",
+									"description": "*количество единиц"
+								},
+								{
+									"key": "direction",
+									"value": "desc",
+									"description": "*направление сортировки"
+								}
+							]
+						},
+						"description": "Метод для получения списка всех транзакций.\n\nВозможна сортировка по полям (принимаются параметры data или amount).\n\nВозможно применение направления (desc или asc). По умолчанию asc.\n\nВозможно указать количество выводимых транзакций. По умолчанию 100."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "initialize app",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/init",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"init"
+					]
+				},
+				"description": "Инициализация приложения. Создает суперпользователя и базовый кошелек (счет)."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "user-token",
+			"value": "e818ba63d2d91f9f78149cbff57b05d37d2b869f",
+			"disabled": true
+		}
+	]
+}
